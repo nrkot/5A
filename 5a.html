@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ВАЖНО для мобильных -->
+  <title>Квиз для 4 класса</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f0f9f0;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 500px; /* Ограничиваем ширину */
+      width: 100%;
+    }
+    h1 {
+      color: #2a662a;
+      text-align: center;
+      font-size: 1.6em;
+    }
+    .question {
+      font-size: 1.2em;
+      margin: 15px 0;
+    }
+    button {
+      display: block;
+      width: 100%; /* Кнопки занимают всю ширину */
+      margin: 8px 0;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #c2e7c2;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #9fd49f;
+    }
+    .result {
+      font-size: 1.3em;
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Адаптация для маленьких экранов */
+    @media (max-width: 400px) {
+      h1 { font-size: 1.4em; }
+      .question { font-size: 1.1em; }
+      button { font-size: 0.95em; padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Квиз: Русский язык и природа</h1>
+    <div id="quiz"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "Как правильно написать?", options: ["ложить книгу", "класть книгу"], answer: 1 },
+      { question: "В каком слове есть приставка?", options: ["лес", "подземный"], answer: 1 },
+      { question: "Укажите лишнее слово:", options: ["красивый", "быстро", "высокий"], answer: 1 },
+      { question: "Что нужно делать с мусором в лесу?", options: ["Оставить под деревом", "Убрать с собой"], answer: 1 },
+      { question: "Как можно помочь птицам зимой?", options: ["Сделать кормушку", "Гонять их"], answer: 0 },
+      { question: "Что нельзя делать на природе?", options: ["Рвать редкие цветы", "Слушать пение птиц"], answer: 0 }
+    ];
+
+    let current = 0, score = 0;
+    const quiz = document.getElementById("quiz");
+
+    function showQuestion() {
+      if (current < questions.length) {
+        const q = questions[current];
+        quiz.innerHTML = `
+          <div class="question">${q.question}</div>
+          ${q.options.map((opt,i)=>`<button onclick="check(${i})">${opt}</button>`).join("")}
+        `;
+      } else {
+        quiz.innerHTML = `<div class="result">Ваш результат: ${score} из ${questions.length}</div>`;
+      }
+    }
+
+    function check(i) {
+      if (i === questions[current].answer) score++;
+      current++;
+      showQuestion();
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
